@@ -17,6 +17,19 @@ jobs:
       - name: Build Release x64
         run: msbuild Cloud2BatteryMonitorUI.sln /p:Configuration=Release_x64 /p:Platform=x64 /m
 
+      - name: Check the exe has the new menus
+        shell: pwsh
+        run: |
+          $exe = 'x64/Release/Cloud2BatteryMonitorUI.exe'
+          $bytes = [IO.File]::ReadAllBytes($exe)
+          # String literals are UTF-16 and may start on an odd byte, so decode at both alignments.
+          $text = [Text.Encoding]::Unicode.GetString($bytes) + [Text.Encoding]::Unicode.GetString($bytes, 1, $bytes.Length - 1)
+          foreach ($s in '&Hide to tray', 'Use &battery tray icon', 'Project page on &GitHub') {
+            if (-not $text.Contains($s)) { throw "Missing menu text: $s" }
+            Write-Host "Found: $s"
+          }
+          (Get-FileHash $exe -Algorithm SHA256).Hash
+
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
