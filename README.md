@@ -45,6 +45,16 @@ The app consists of two forms/screens and a system tray icon.
 ![main_screen](https://github.com/auto94/Cloud2-Battery-Monitor/assets/36648280/3546df9f-008a-416b-8d59-2f7526bdea86)
 
 
+**Menus:**
+
+The main window has a menu bar:
+
+- **File**: Refresh (F5), Hide to tray, Exit
+- **Options**: Settings... (Ctrl+,), Use battery tray icon, Start with Windows
+- **Help**: Project page on GitHub, Report an issue, About...
+
+Right-clicking the system tray icon shows the headset's current status at the top, then Open, Refresh now and Settings..., plus quick toggles for the battery tray icon and starting with Windows, and Exit. Double-clicking the tray icon opens the main window.
+
 **Settings screen:**
 
 ![settings_form](https://github.com/user-attachments/assets/79c7fe4a-3f13-40a4-b3b4-776aef14fe8f)

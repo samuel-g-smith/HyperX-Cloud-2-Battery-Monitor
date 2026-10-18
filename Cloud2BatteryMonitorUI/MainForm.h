@@ -99,11 +99,30 @@ namespace Cloud2BatteryMonitorUI {
 
 
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
-	private: System::Windows::Forms::ToolStripMenuItem^ menuTitleSettings;
-	private: System::Windows::Forms::ToolStripMenuItem^ menuTitleAbout;
+	private: System::Windows::Forms::ToolStripMenuItem^ menuTitleFile;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemFileRefresh;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemFileHide;
+	private: System::Windows::Forms::ToolStripSeparator^ separatorFile;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemFileExit;
+	private: System::Windows::Forms::ToolStripMenuItem^ menuTitleOptions;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemOptionsSettings;
+	private: System::Windows::Forms::ToolStripSeparator^ separatorOptions;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemOptionsBatIcon;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemOptionsAutostart;
+	private: System::Windows::Forms::ToolStripMenuItem^ menuTitleHelp;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemHelpProjectPage;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemHelpReportIssue;
+	private: System::Windows::Forms::ToolStripSeparator^ separatorHelp;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemHelpAbout;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemTrayStatus;
+	private: System::Windows::Forms::ToolStripSeparator^ separatorTrayStatus;
 	private: System::Windows::Forms::ToolStripMenuItem^ itemOpen;
 	private: System::Windows::Forms::ToolStripMenuItem^ itemSettings;
 	private: System::Windows::Forms::ToolStripMenuItem^ itemRefresh;
+	private: System::Windows::Forms::ToolStripSeparator^ separatorTrayToggles;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemTrayBatIcon;
+	private: System::Windows::Forms::ToolStripMenuItem^ itemTrayAutostart;
+	private: System::Windows::Forms::ToolStripSeparator^ separatorTrayExit;
 	private: System::Windows::Forms::ToolStripMenuItem^ itemExit;
 
 
@@ -141,11 +160,30 @@ namespace Cloud2BatteryMonitorUI {
 			this->contextMenuNotifyIcon = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->btnRefresh = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->menuTitleSettings = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->menuTitleAbout = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuTitleFile = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemFileRefresh = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemFileHide = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->separatorFile = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->itemFileExit = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuTitleOptions = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemOptionsSettings = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->separatorOptions = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->itemOptionsBatIcon = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemOptionsAutostart = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuTitleHelp = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemHelpProjectPage = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemHelpReportIssue = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->separatorHelp = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->itemHelpAbout = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemTrayStatus = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->separatorTrayStatus = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->itemRefresh = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->itemSettings = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->itemOpen = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->separatorTrayToggles = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->itemTrayBatIcon = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->itemTrayAutostart = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->separatorTrayExit = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->itemExit = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuNotifyIcon->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
@@ -208,13 +246,16 @@ namespace Cloud2BatteryMonitorUI {
 			// 
 			// contextMenuNotifyIcon
 			// 
-			this->contextMenuNotifyIcon->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->itemOpen,
-					this->itemSettings, this->itemRefresh, this->itemExit
+			this->contextMenuNotifyIcon->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(10) {
+				this->itemTrayStatus,
+					this->separatorTrayStatus, this->itemOpen, this->itemRefresh, this->itemSettings, this->separatorTrayToggles, this->itemTrayBatIcon,
+					this->itemTrayAutostart, this->separatorTrayExit, this->itemExit
 			});
 			this->contextMenuNotifyIcon->Name = L"contextMenuStrip1";
+			this->contextMenuNotifyIcon->ShowCheckMargin = true;
 			this->contextMenuNotifyIcon->ShowImageMargin = false;
-			this->contextMenuNotifyIcon->Size = System::Drawing::Size(156, 114);
+			this->contextMenuNotifyIcon->Size = System::Drawing::Size(200, 198);
+			this->contextMenuNotifyIcon->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::ContextMenuNotifyIcon_Opening);
 			// 
 			// btnRefresh
 			// 
@@ -237,9 +278,9 @@ namespace Cloud2BatteryMonitorUI {
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->menuTitleSettings,
-					this->menuTitleAbout
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->menuTitleFile,
+					this->menuTitleOptions, this->menuTitleHelp
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -247,48 +288,182 @@ namespace Cloud2BatteryMonitorUI {
 			this->menuStrip1->TabIndex = 9;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
-			// menuTitleSettings
+			// menuTitleFile
 			// 
-			this->menuTitleSettings->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-			this->menuTitleSettings->Name = L"menuTitleSettings";
-			this->menuTitleSettings->Size = System::Drawing::Size(61, 20);
-			this->menuTitleSettings->Text = L"Settings";
-			this->menuTitleSettings->Click += gcnew System::EventHandler(this, &MainForm::Settings_Click);
+			this->menuTitleFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->itemFileRefresh,
+					this->itemFileHide, this->separatorFile, this->itemFileExit
+			});
+			this->menuTitleFile->Name = L"menuTitleFile";
+			this->menuTitleFile->Size = System::Drawing::Size(37, 20);
+			this->menuTitleFile->Text = L"&File";
 			// 
-			// menuTitleAbout
+			// itemFileRefresh
 			// 
-			this->menuTitleAbout->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-			this->menuTitleAbout->Name = L"menuTitleAbout";
-			this->menuTitleAbout->Size = System::Drawing::Size(52, 20);
-			this->menuTitleAbout->Text = L"About";
-			this->menuTitleAbout->Click += gcnew System::EventHandler(this, &MainForm::MenuTitleAbout_Click);
+			this->itemFileRefresh->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnRefresh.Image")));
+			this->itemFileRefresh->Name = L"itemFileRefresh";
+			this->itemFileRefresh->ShortcutKeys = System::Windows::Forms::Keys::F5;
+			this->itemFileRefresh->Size = System::Drawing::Size(180, 22);
+			this->itemFileRefresh->Text = L"&Refresh";
+			this->itemFileRefresh->Click += gcnew System::EventHandler(this, &MainForm::BtnRefresh_Click);
+			// 
+			// itemFileHide
+			// 
+			this->itemFileHide->Name = L"itemFileHide";
+			this->itemFileHide->Size = System::Drawing::Size(180, 22);
+			this->itemFileHide->Text = L"&Hide to tray";
+			this->itemFileHide->Click += gcnew System::EventHandler(this, &MainForm::ItemHide_Click);
+			// 
+			// separatorFile
+			// 
+			this->separatorFile->Name = L"separatorFile";
+			this->separatorFile->Size = System::Drawing::Size(177, 6);
+			// 
+			// itemFileExit
+			// 
+			this->itemFileExit->Name = L"itemFileExit";
+			this->itemFileExit->Size = System::Drawing::Size(180, 22);
+			this->itemFileExit->Text = L"E&xit";
+			this->itemFileExit->Click += gcnew System::EventHandler(this, &MainForm::ItemExit_Click);
+			// 
+			// menuTitleOptions
+			// 
+			this->menuTitleOptions->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->itemOptionsSettings,
+					this->separatorOptions, this->itemOptionsBatIcon, this->itemOptionsAutostart
+			});
+			this->menuTitleOptions->Name = L"menuTitleOptions";
+			this->menuTitleOptions->Size = System::Drawing::Size(61, 20);
+			this->menuTitleOptions->Text = L"&Options";
+			this->menuTitleOptions->DropDownOpening += gcnew System::EventHandler(this, &MainForm::MenuTitleOptions_DropDownOpening);
+			// 
+			// itemOptionsSettings
+			// 
+			this->itemOptionsSettings->Name = L"itemOptionsSettings";
+			this->itemOptionsSettings->ShortcutKeyDisplayString = L"Ctrl+,";
+			this->itemOptionsSettings->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Oemcomma));
+			this->itemOptionsSettings->Size = System::Drawing::Size(200, 22);
+			this->itemOptionsSettings->Text = L"&Settings...";
+			this->itemOptionsSettings->Click += gcnew System::EventHandler(this, &MainForm::Settings_Click);
+			// 
+			// separatorOptions
+			// 
+			this->separatorOptions->Name = L"separatorOptions";
+			this->separatorOptions->Size = System::Drawing::Size(197, 6);
+			// 
+			// itemOptionsBatIcon
+			// 
+			this->itemOptionsBatIcon->Name = L"itemOptionsBatIcon";
+			this->itemOptionsBatIcon->Size = System::Drawing::Size(200, 22);
+			this->itemOptionsBatIcon->Text = L"Use &battery tray icon";
+			this->itemOptionsBatIcon->Click += gcnew System::EventHandler(this, &MainForm::ItemBatIcon_Click);
+			// 
+			// itemOptionsAutostart
+			// 
+			this->itemOptionsAutostart->Name = L"itemOptionsAutostart";
+			this->itemOptionsAutostart->Size = System::Drawing::Size(200, 22);
+			this->itemOptionsAutostart->Text = L"Start with &Windows";
+			this->itemOptionsAutostart->Click += gcnew System::EventHandler(this, &MainForm::ItemAutostart_Click);
+			// 
+			// menuTitleHelp
+			// 
+			this->menuTitleHelp->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->itemHelpProjectPage,
+					this->itemHelpReportIssue, this->separatorHelp, this->itemHelpAbout
+			});
+			this->menuTitleHelp->Name = L"menuTitleHelp";
+			this->menuTitleHelp->Size = System::Drawing::Size(44, 20);
+			this->menuTitleHelp->Text = L"&Help";
+			// 
+			// itemHelpProjectPage
+			// 
+			this->itemHelpProjectPage->Name = L"itemHelpProjectPage";
+			this->itemHelpProjectPage->Size = System::Drawing::Size(200, 22);
+			this->itemHelpProjectPage->Text = L"Project page on &GitHub";
+			this->itemHelpProjectPage->Click += gcnew System::EventHandler(this, &MainForm::ItemHelpProjectPage_Click);
+			// 
+			// itemHelpReportIssue
+			// 
+			this->itemHelpReportIssue->Name = L"itemHelpReportIssue";
+			this->itemHelpReportIssue->Size = System::Drawing::Size(200, 22);
+			this->itemHelpReportIssue->Text = L"&Report an issue";
+			this->itemHelpReportIssue->Click += gcnew System::EventHandler(this, &MainForm::ItemHelpReportIssue_Click);
+			// 
+			// separatorHelp
+			// 
+			this->separatorHelp->Name = L"separatorHelp";
+			this->separatorHelp->Size = System::Drawing::Size(197, 6);
+			// 
+			// itemHelpAbout
+			// 
+			this->itemHelpAbout->Name = L"itemHelpAbout";
+			this->itemHelpAbout->Size = System::Drawing::Size(200, 22);
+			this->itemHelpAbout->Text = L"&About...";
+			this->itemHelpAbout->Click += gcnew System::EventHandler(this, &MainForm::ItemHelpAbout_Click);
+			// 
+			// itemTrayStatus
+			// 
+			this->itemTrayStatus->Enabled = false;
+			this->itemTrayStatus->Name = L"itemTrayStatus";
+			this->itemTrayStatus->Size = System::Drawing::Size(199, 22);
+			this->itemTrayStatus->Text = L"No headset detected";
+			// 
+			// separatorTrayStatus
+			// 
+			this->separatorTrayStatus->Name = L"separatorTrayStatus";
+			this->separatorTrayStatus->Size = System::Drawing::Size(196, 6);
 			// 
 			// itemRefresh
 			// 
 			this->itemRefresh->Name = L"itemRefresh";
-			this->itemRefresh->Size = System::Drawing::Size(155, 22);
-			this->itemRefresh->Text = L"Refresh";
+			this->itemRefresh->Size = System::Drawing::Size(199, 22);
+			this->itemRefresh->Text = L"&Refresh now";
 			this->itemRefresh->Click += gcnew System::EventHandler(this, &MainForm::BtnRefresh_Click);
 			// 
 			// itemSettings
 			// 
 			this->itemSettings->Name = L"itemSettings";
-			this->itemSettings->Size = System::Drawing::Size(155, 22);
-			this->itemSettings->Text = L"Settings";
+			this->itemSettings->Size = System::Drawing::Size(199, 22);
+			this->itemSettings->Text = L"&Settings...";
 			this->itemSettings->Click += gcnew System::EventHandler(this, &MainForm::Settings_Click);
 			// 
 			// itemOpen
 			// 
+			this->itemOpen->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.0F, System::Drawing::FontStyle::Bold));
 			this->itemOpen->Name = L"itemOpen";
-			this->itemOpen->Size = System::Drawing::Size(155, 22);
-			this->itemOpen->Text = L"Open";
+			this->itemOpen->Size = System::Drawing::Size(199, 22);
+			this->itemOpen->Text = L"&Open";
 			this->itemOpen->Click += gcnew System::EventHandler(this, &MainForm::ItemOpen_Click);
+			// 
+			// separatorTrayToggles
+			// 
+			this->separatorTrayToggles->Name = L"separatorTrayToggles";
+			this->separatorTrayToggles->Size = System::Drawing::Size(196, 6);
+			// 
+			// itemTrayBatIcon
+			// 
+			this->itemTrayBatIcon->Name = L"itemTrayBatIcon";
+			this->itemTrayBatIcon->Size = System::Drawing::Size(199, 22);
+			this->itemTrayBatIcon->Text = L"Use &battery tray icon";
+			this->itemTrayBatIcon->Click += gcnew System::EventHandler(this, &MainForm::ItemBatIcon_Click);
+			// 
+			// itemTrayAutostart
+			// 
+			this->itemTrayAutostart->Name = L"itemTrayAutostart";
+			this->itemTrayAutostart->Size = System::Drawing::Size(199, 22);
+			this->itemTrayAutostart->Text = L"Start with &Windows";
+			this->itemTrayAutostart->Click += gcnew System::EventHandler(this, &MainForm::ItemAutostart_Click);
+			// 
+			// separatorTrayExit
+			// 
+			this->separatorTrayExit->Name = L"separatorTrayExit";
+			this->separatorTrayExit->Size = System::Drawing::Size(196, 6);
 			// 
 			// itemExit
 			// 
 			this->itemExit->Name = L"itemExit";
-			this->itemExit->Size = System::Drawing::Size(155, 22);
-			this->itemExit->Text = L"Exit";
+			this->itemExit->Size = System::Drawing::Size(199, 22);
+			this->itemExit->Text = L"E&xit";
 			this->itemExit->Click += gcnew System::EventHandler(this, &MainForm::ItemExit_Click);
 			// 
 			// MainForm
@@ -325,6 +500,7 @@ namespace Cloud2BatteryMonitorUI {
 #define NO_DEVICE_STRING "No headset device detected."
 #define BATTERY_LEVEL_STRING "Battery level: "
 #define FONT "Tahoma"
+#define PROJECT_URL "https://github.com/auto94/HyperX-Cloud-2-Battery-Monitor"
 
 	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) 
 	{
@@ -394,6 +570,15 @@ namespace Cloud2BatteryMonitorUI {
 				System::String^ batStr2 = gcnew System::String(to_string(batteryLevel).c_str());
 				System::String^ prodStr = gcnew System::String(productName);
 				RefreshTrayIcon(batStr2, prodStr);
+
+				if (batteryLevel == 0)
+				{
+					this->itemTrayStatus->Text = prodStr + ": not active";
+				}
+				else
+				{
+					this->itemTrayStatus->Text = prodStr + ": " + batteryLevel + "%";
+				}
 				delete settingsHelper;
 				//close the connection only if it was opened.
 				hid_close(headsetDevice);
@@ -405,6 +590,7 @@ namespace Cloud2BatteryMonitorUI {
 				//use loaded offline icon
 				this->iconSystemTray->Icon = defaultOfflineIcon;
 				this->lbStatus->Text = "Could not connect to headset.";
+				this->itemTrayStatus->Text = "Could not connect to headset";
 				this->btnRefresh->Visible = true;
 				lowBatteryPopupShown = false;
 			}
@@ -415,6 +601,7 @@ namespace Cloud2BatteryMonitorUI {
 			//use loaded offline icon
 			this->iconSystemTray->Icon = defaultOfflineIcon;
 			this->lbStatus->Text = "No headset device detected.";
+			this->itemTrayStatus->Text = "No headset detected";
 			this->btnRefresh->Visible = true;
 			lowBatteryPopupShown = false;
 		}
@@ -445,9 +632,16 @@ namespace Cloud2BatteryMonitorUI {
 	private: System::Void TrayIcon_DoubleClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) 
 	{
 		// Opens the application
-		Show();
-		this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+		RestoreFromTray();
 		this->MainForm_Load(sender, e);
+	}
+
+	private: void RestoreFromTray()
+	{
+		// The form has a fixed size, so restore it to normal (not maximized) and bring it to the front.
+		Show();
+		this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+		Activate();
 	}
 
 	private: System::Void MainForm_Closing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
@@ -639,9 +833,58 @@ namespace Cloud2BatteryMonitorUI {
 
 	private: System::Void ItemOpen_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
-		this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-		Show();
+		RestoreFromTray();
 		this->MainForm_Load(sender, e);
+	}
+
+	private: System::Void ItemHide_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		// MainForm_Resize hides the window once it is minimized.
+		this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
+	}
+
+	private: System::Void ContextMenuNotifyIcon_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e)
+	{
+		SyncToggleItems();
+	}
+
+	private: System::Void MenuTitleOptions_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
+	{
+		SyncToggleItems();
+	}
+
+	private: void SyncToggleItems()
+	{
+		// Settings can change from the settings form too, so read them each time a menu opens.
+		SettingsHelper* settingsHelper = new SettingsHelper();
+		bool batIcon = settingsHelper->getBatIcon();
+		bool autostart = settingsHelper->getAutostart();
+		delete settingsHelper;
+
+		this->itemOptionsBatIcon->Checked = batIcon;
+		this->itemTrayBatIcon->Checked = batIcon;
+		this->itemOptionsAutostart->Checked = autostart;
+		this->itemTrayAutostart->Checked = autostart;
+	}
+
+	private: System::Void ItemBatIcon_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		SettingsHelper* settingsHelper = new SettingsHelper();
+		settingsHelper->setBatIcon(!settingsHelper->getBatIcon());
+		settingsHelper->saveSettings();
+		delete settingsHelper;
+
+		// Redraw the tray icon in the new style.
+		MainForm_Load(sender, e);
+	}
+
+	private: System::Void ItemAutostart_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		// saveSettings() adds or removes the registry autostart entry.
+		SettingsHelper* settingsHelper = new SettingsHelper();
+		settingsHelper->setAutostart(!settingsHelper->getAutostart());
+		settingsHelper->saveSettings();
+		delete settingsHelper;
 	}
 
 	private: System::Void Settings_Click(System::Object^ sender, System::EventArgs^ e) 
@@ -656,9 +899,42 @@ namespace Cloud2BatteryMonitorUI {
 		}
 	}
 
-	private: System::Void MenuTitleAbout_Click(System::Object^ sendar, System::EventArgs^ e) 
+	private: System::Void ItemHelpProjectPage_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		system("start https://github.com/auto94/Cloud2-Battery-Monitor");
+		OpenUrl(PROJECT_URL);
+	}
+
+	private: System::Void ItemHelpReportIssue_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		OpenUrl(PROJECT_URL "/issues/new/choose");
+	}
+
+	private: System::Void ItemHelpAbout_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		System::Windows::Forms::DialogResult result = MessageBox::Show(this,
+			"HyperX Cloud Battery Monitor\n\n"
+			"Shows the battery level of HyperX Cloud wireless headsets in the system tray.\n\n"
+			"Released under the MIT license.\n\n"
+			"Open the project page on GitHub?",
+			"About", MessageBoxButtons::YesNo, MessageBoxIcon::Information);
+
+		if (result == System::Windows::Forms::DialogResult::Yes)
+		{
+			OpenUrl(PROJECT_URL);
+		}
+	}
+
+	private: void OpenUrl(System::String^ url)
+	{
+		// Opens the URL in the default browser without flashing a console window.
+		try
+		{
+			System::Diagnostics::Process::Start(url);
+		}
+		catch (System::Exception^)
+		{
+			MessageBox::Show(url, "Could not open link", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
 	}
 
 	private: void setupTimer() 
