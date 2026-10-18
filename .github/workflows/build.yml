@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: microsoft/setup-msbuild@v2
+
+      - name: Build Release x64
+        run: msbuild Cloud2BatteryMonitorUI.sln /p:Configuration=Release_x64 /p:Platform=x64 /m
+
+      - name: Upload app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cloud2BatteryMonitor-x64
+          if-no-files-found: error
+          path: |
+            x64/Release/Cloud2BatteryMonitorUI.exe
+            x64/Release/hidapi.dll
+            x64/Release/settings.xml
+            x64/Release/icons/
